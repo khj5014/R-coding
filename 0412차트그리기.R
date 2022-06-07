@@ -26,7 +26,7 @@ name <- c("영업1팀", "영업2팀", "영업3팀", "영업4팀" )
 
 barplot(height, names.arg=name,main="부서별 영업실적")
 
-#막대색상 무지개
+#막대색상 무지개개
 barplot(height, names.arg=name,main="부서별 영업실적"
         ,col=rainbow(length(height)))
 
@@ -55,7 +55,6 @@ text(x=bp,y=height,labels=round(height,0),pos=1)
 barplot(height, names.arg=name, main = "부서별 영업실적",
         col=rainbow(length(height)), xlab="영업 실적(억원)",
         ylab="부서", xlim=c(0,25), horiz=TRUE, width=1)
-
 
 #그룹화된 바 챠트 생성(스택형)
 height1 <- c(4, 18, 5, 8)
@@ -131,44 +130,6 @@ histo <- hist(quantity, main = "CDNow CD판매량", xlab="거래량", ylab="빈�
 text(histo$mids, 0)
 
 
-#데이터가져와서 차트 3가지 그리기
-
-# 막대그래프로 그리기
-library(graphics)
-url <-"C:/Users/gmlwo/Desktop/도로교통공단_부문별_고속도로_교통사고_20181231.csv"
-data <- read.csv(url, header = T)
-
-
-name <- c("사망자수", "부상자수","중상","경상","부상신고")
-sum <- c(sum(data$사망자수),sum(data$부상자수),sum(data$중상),sum(data$경상),sum(data$부상신고))
-
-bp <- barplot(sum, names.arg=name,main="2020년도 부문별_고속도로_교통사고"
-              ,col=rainbow(length(sum)), xlab="부문", ylab="발생건수",
-              ylim=c(0,9000))
-text(x=bp,y=sum, labels=round(sum,0),pos=3)
-
-
-#히스토그램으로그리기
-url <-"C:/Users/gmlwo/Desktop/도로교통공단_부문별_고속도로_교통사고_20181231.csv"
-data <- read.csv(url, header = T)
-acc <- data$발생건수
-acchisto <- hist(acc, main = "2020년_부문별_고속도로_교통사고",
-          col=rainbow(7),
-          xlab="발생건수",
-          ylab="발생량",
-          ylim=c(0, 100),
-          breaks=seq(0, 350, by=10),
-          labels=TRUE)
-
-#박스플롯으로 그리기
-url <-"C:/Users/gmlwo/Desktop/도로교통공단_부문별_고속도로_교통사고_20181231.csv"
-data <- read.csv(url, header = T)
-injured<- data$부상자수
-quantile(injured, c(0.25, 0.5, 0.75))
-boxplot(injured, main="2020년도 고속도로 부상자 발생 건수", 
-        xlab="부상자", ylab="부상자 발생 건수", col="red")
-
-
 #애니메이션1(카운트다운)
 library(animation)
 ani.options(interval = 1)
@@ -190,17 +151,16 @@ while(TRUE){
   barplot(y,ylim=c(0,1), col=rainbow(5))
   ani.pause()
 }
-
 #애니메이션3(움직이는 그림)
 library(animation)
 library(png)
-ani.options(interval = 0.1)
-for (i in 1:6) {
-  img <- paste("C:/Users/gmlwo/Desktop/img/gml", i, ".png", sep="")
+ani.options(interval = 0.5)
+for(i in 1:6){
+  img <- paste("C://temp/ball", i, ".png", sep="")
   img <- readPNG(img)
   plot.new()
-  rect(0, 0, 1, 1, col="white")
-  rasterImage(img, 0, 0, 1, 1)
+  rect(0,0,1,1,col="white")
+  rasterImage(img, 0,0,1,1)
   ani.pause()
 }
 dev.off()

@@ -15,7 +15,6 @@ Client_ID <- "btxlL0b20thvLgPaLFwt"
 Client_Secret <- "EtM9QJcYf_"
 
 query <- URLencode(iconv("인공지능", "euc-kr", "UTF-8"))
-query2 <- URLencode(iconv("여행", "euc-kr", "UTF-8"))
 url <- paste(searchUrl, "?query=", query, "&display=20", sep="")
 
 doc <- getURL(url,
@@ -66,56 +65,3 @@ wordcloud(nouns.df.sort[,1],
           random.order = F,
           random.color = T,
           colors=rainbow(10))
-
-#------------- 추가 블로그 데이터 실습--------------
-search_url2 <- "https://openapi.naver.com/v1/search/blog.xml"
-
-url2 <- paste(search_url2,"?query=",query2,"&display=20", sep="")
-url2
-
-doc2 <- getURL(url2, httpheader =c('Content-Type' = "application/xml",
-                                   'X-Naver-Client-Id' = Client_ID,
-                                   'X-Naver-Client-Secret' = Client_Secret))
-doc2
-
-xml2 <- xmlParse(doc2)
-xml2
-df2 <- xmlToDataFrame(getNodeSet( xml2,"//item"))
-str(df2)
-
-description <- df2[,3]
-description
-
-description_gsubed <- gsub("\\d|<b>`|</b>|&quot;","",description)
-
-
-
-nouns <- nouns(iconv(description_gsubed, "utf-8"))
-nouns
-
-nouns.all <- unlist(nouns, use.names =F)
-
-nouns.all1 <- nouns.all[nchar(nouns.all)<=1]
-nouns.all1 
-
-nouns.all2 <- nouns.all[nchar(nouns.all)>=2]
-nouns.all2
-
-nouns.freq <- table(nouns.all2)
-nouns.freq
-
-nouns.df <- data.frame(nouns.freq,stringsAsFactors = F)
-nouns.df
-
-nouns.df.sort <- nouns.df[order(-nouns.df$Freq),]
-nouns.df.sort
-
-wordcloud(nouns.df.sort[,1],
-          freq=nouns.df.sort[,2],
-          min.freq=1,
-          scale =c(3,0.6),
-          rot.per =0.25,
-          random.order= F,
-          random.color= T,
-          colors=rainbow(10)
-)
