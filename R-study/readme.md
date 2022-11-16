@@ -1,4 +1,4 @@
-# K값 그래프
+# 최적의 K값 그래프
 ![image](https://user-images.githubusercontent.com/64896739/202121318-695c9ec7-82e7-4a84-aae5-5169664764ed.png)
 
 # 평균에 대한 산점도 그래프
