@@ -3,7 +3,7 @@ library(gmodels) # 크로스테이블 사용하기 위해
 library(GGally)  # GGPAIRS 사용하기 위해
 
 #작업 디렉토리 지정
-setwd("D:\\R\\data")
+setwd("D:/CodingFolder/Github/R-coding/R-study")
 WB <- read.csv("wisc_bc_data.csv", stringsAsFactors = FALSE)
 
 #id 빼고 실행 - 예측에 필요없는값
